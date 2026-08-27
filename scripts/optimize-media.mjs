@@ -22,6 +22,23 @@ const TRIM_START = {
   "milestone-20k": 2,
 };
 
+// Clips shown large on the page (hero background, full-width case studies,
+// the Oro signature reel, big craft/studio figures) — compression artifacts
+// that vanish in a 220px grid tile are obvious at these sizes, so these get
+// the best quality we can give them instead of the standard web-CRF pass.
+// Everything else (Instagram grid, applications grid, the services stepper —
+// all capped well under 600px) stays on the aggressive/small-scale pipeline.
+const LARGE_SCALE = new Set([
+  "hero-oro-reveal",
+  "oro-shades-reveal",
+  "oro-architect-office",
+  "gulrang-bungalow",
+  "garba-wall",
+  "craft-process",
+  "oro-refined",
+  "milestone-20k",
+]);
+
 const ffmpegArgIdx = process.argv.indexOf("--ffmpeg");
 const FFMPEG =
   (ffmpegArgIdx !== -1 && process.argv[ffmpegArgIdx + 1]) ||
@@ -62,21 +79,37 @@ for (const file of files) {
   const outPoster = path.join(outDir, `${name}.jpg`);
   const trim = TRIM_START[name] ?? 0;
 
-  process.stdout.write(`Encoding ${name}.mp4 ... `);
+  const large = LARGE_SCALE.has(name);
+  const canStreamCopy = large && trim === 0;
+  process.stdout.write(
+    `Encoding ${name}.mp4 (${canStreamCopy ? "copy" : large ? "crf20" : "crf28"}) ... `
+  );
 
-  // Video: strip audio (always played muted), re-encode at a size-efficient
-  // CRF, keep native resolution (source is already a modest 720px-wide
-  // vertical export), and move the moov atom to the front (+faststart) so
-  // playback can start before the whole file has downloaded.
+  // Always: strip audio (every clip is played muted, so it's dead weight)
+  // and move the moov atom to the front (+faststart) so playback can start
+  // before the whole file has downloaded.
+  //
+  // Large-scale clips with no trim needed: stream-copy the video (-c:v copy)
+  // — zero re-encoding, so quality is bit-for-bit identical to the source.
+  // Large-scale clips that DO need a trim can't stream-copy: these sources
+  // keyframe every 5s, so a copy-mode seek to 2-3.5s would snap back to the
+  // 0s keyframe and trim nothing. Those get a high-quality CRF 20 re-encode
+  // instead — visually excellent, frame-accurate, without the wildly
+  // oversized output CRF 16 produced on this high-motion footage.
+  // Everything else: the standard size-efficient CRF 28 pass.
   const videoArgs = [
     "-y",
     ...(trim > 0 ? ["-ss", String(trim)] : []),
     "-i", inPath,
     "-an",
-    "-c:v", "libx264",
-    "-preset", "slow",
-    "-crf", "28",
-    "-pix_fmt", "yuv420p",
+    ...(canStreamCopy
+      ? ["-c:v", "copy"]
+      : [
+          "-c:v", "libx264",
+          "-preset", "slow",
+          "-crf", large ? "20" : "28",
+          "-pix_fmt", "yuv420p",
+        ]),
     "-movflags", "+faststart",
     outVideo,
   ];
