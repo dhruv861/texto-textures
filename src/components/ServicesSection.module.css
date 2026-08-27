@@ -42,6 +42,7 @@
   position: relative;
   flex: 1;
   min-height: 0;
+  overflow: hidden;
 }
 
 .panel {
@@ -51,6 +52,7 @@
   align-items: center;
   gap: clamp(28px, 5vw, 64px);
   flex-wrap: wrap;
+  overflow: hidden;
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -66,8 +68,13 @@
 }
 
 .panelMedia {
-  flex: 1 1 340px;
-  max-width: 560px;
+  /* Sized from the row's actual height first (never taller than the panel
+     itself has room for), capped so it doesn't get huge on short/wide rows
+     either — aspect-ratio then derives width from whichever height wins. */
+  flex: 0 0 auto;
+  height: min(100%, 340px);
+  width: auto;
+  max-width: min(560px, 100%);
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--cream-2);
