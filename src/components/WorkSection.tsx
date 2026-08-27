@@ -55,6 +55,7 @@ const APPLICATIONS = [
   { label: "Residential", video: "suede-limewash-kids" },
   { label: "Hospitality & Retail", video: "jewelry-showroom" },
   { label: "Wet Areas & Bathrooms", video: "bathroom-boutique" },
+  { label: "Furniture", video: "microcement-tables" },
 ];
 
 export default function WorkSection() {
@@ -112,9 +113,6 @@ export default function WorkSection() {
               <div className={styles.gridLabel}>{app.label}</div>
             </div>
           ))}
-          <div className={styles.furnitureCell}>
-            <div className={styles.gridLabel}>Furniture</div>
-          </div>
         </div>
       </Reveal>
     </section>
