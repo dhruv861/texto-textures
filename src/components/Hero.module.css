@@ -1,5 +1,16 @@
 .hero {
   position: relative;
+}
+
+.pinWrapper {
+  position: relative;
+  height: 240vh;
+  height: 240dvh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
   height: 100vh;
   height: 100dvh;
   min-height: 640px;
@@ -43,9 +54,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.85;
   margin-bottom: 18px;
-  animation: fadeUp 1s 0.2s cubic-bezier(0.16, 0.8, 0.24, 1) both;
 }
 
 .title {
@@ -55,24 +64,17 @@
   letter-spacing: -0.01em;
   margin: 0 0 24px;
   max-width: 16ch;
-  animation: fadeUp 1.1s 0.4s cubic-bezier(0.16, 0.8, 0.24, 1) both;
+}
+
+.titleLine {
+  display: block;
 }
 
 .subtitle {
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   max-width: 46ch;
-  opacity: 0.92;
   line-height: 1.5;
   margin: 0;
-  animation: fadeUp 1.1s 0.6s cubic-bezier(0.16, 0.8, 0.24, 1) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .eyebrow,
-  .title,
-  .subtitle {
-    animation: none;
-  }
 }
 
 .scrollCue {
@@ -88,4 +90,14 @@
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pinWrapper {
+    height: auto;
+  }
+
+  .sticky {
+    position: relative;
+  }
 }

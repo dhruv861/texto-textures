@@ -1,32 +1,80 @@
 .section {
-  padding: clamp(48px, 8vw, 100px) clamp(24px, 6vw, 96px) 0;
+  position: relative;
+}
+
+.pinWrapper {
+  position: relative;
+  height: 480vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(96px, 10vw, 120px) clamp(24px, 6vw, 96px) clamp(40px, 6vw, 64px);
+  box-sizing: border-box;
 }
 
 .intro {
-  margin-bottom: clamp(48px, 7vw, 88px);
+  margin-bottom: clamp(24px, 4vw, 48px);
+  max-width: 900px;
+  flex-shrink: 0;
 }
 
-.row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: clamp(32px, 5vw, 80px);
+.heading {
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  line-height: 1.1;
+  margin: 0 0 16px;
+  max-width: 16ch;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+.panelStage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
   align-items: center;
-  padding: 48px 0;
-  border-top: 1px solid var(--line);
+  gap: clamp(28px, 5vw, 64px);
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+  pointer-events: none;
 }
 
-.media {
-  aspect-ratio: 4 / 3;
+.panel.panelActive {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.panelMedia {
+  flex: 1 1 340px;
+  max-width: 560px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--cream-2);
 }
 
-.mediaReverse {
-  order: 1;
-}
-
-.textReverse {
-  order: 2;
+.panelText {
+  flex: 1 1 300px;
 }
 
 .index {
@@ -37,15 +85,23 @@
 
 .title {
   font-weight: 500;
-  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-  margin: 0 0 16px;
+  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  margin: 0 0 14px;
+}
+
+.oroTitle {
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  margin: 0 0 14px;
+  color: var(--accent-deep);
 }
 
 .body {
   color: var(--ink-soft);
-  line-height: 1.65;
+  line-height: 1.6;
   max-width: 42ch;
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 
 .quote {
@@ -54,30 +110,45 @@
   margin: 0;
 }
 
-.signature {
-  padding: 64px 0 80px;
-  border-top: 1px solid var(--line);
-  text-align: center;
-}
-
-.oroTitle {
-  font-style: italic;
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-
-.signatureBody {
-  max-width: 46ch;
-  margin: 0 auto 28px;
-  color: var(--ink-soft);
-  line-height: 1.6;
-}
-
 .oroCta {
   display: inline-block;
-  padding: 12px 28px;
+  padding: 10px 22px;
   border: 1px solid var(--accent);
   border-radius: 999px;
   color: var(--accent-deep);
+  font-size: 0.92rem;
+}
+
+@media (min-width: 860px) {
+  .desktopOnly {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pinWrapper {
+    height: auto;
+  }
+
+  .sticky {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    display: block;
+    padding-top: clamp(48px, 8vw, 100px);
+  }
+
+  .panelStage {
+    position: static;
+    margin-top: clamp(24px, 4vw, 48px);
+  }
+
+  .panel {
+    position: static;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
 }
