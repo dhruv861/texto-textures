@@ -16,8 +16,16 @@ function applyReveal(el: HTMLElement | null, p: number, start: number, end: numb
   el.style.transform = `translateY(${(1 - t) * 26}px)`;
 }
 
+// How much of the pin range the video takes to go from a crisp introduction
+// shot to fully pulled-back-and-blurred, so the reader's eye has nowhere to
+// go but the text by the time the subtitle finishes revealing.
+const VIDEO_FOCUS_PULL_END = 0.85;
+const MAX_BLUR_PX = 14;
+const MIN_BRIGHTNESS = 0.72;
+
 export default function Hero() {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const videoWrapRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const line1Ref = useRef<HTMLSpanElement>(null);
   const line2Ref = useRef<HTMLSpanElement>(null);
@@ -33,13 +41,19 @@ export default function Hero() {
       const cueT = clamp((p - 0.6) / 0.3, 0, 1);
       cueRef.current.style.opacity = String(1 - cueT);
     }
+    if (videoWrapRef.current) {
+      const focusPullT = clamp(p / VIDEO_FOCUS_PULL_END, 0, 1);
+      const blur = focusPullT * MAX_BLUR_PX;
+      const brightness = 1 - focusPullT * (1 - MIN_BRIGHTNESS);
+      videoWrapRef.current.style.filter = `blur(${blur}px) brightness(${brightness})`;
+    }
   });
 
   return (
     <section id="top" className={styles.hero}>
       <div ref={wrapperRef} className={styles.pinWrapper}>
         <div className={styles.sticky}>
-          <div className={styles.videoWrap}>
+          <div ref={videoWrapRef} className={styles.videoWrap}>
             <LazyVideo name="hero-oro-reveal" priority />
           </div>
           <div className={styles.scrim} />
