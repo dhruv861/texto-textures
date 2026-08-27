@@ -1,0 +1,43 @@
+.section {
+  background: var(--charcoal);
+  color: var(--paper);
+  padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 96px);
+}
+
+.heading {
+  font-weight: 500;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.08;
+  margin: 0 0 24px;
+  max-width: 16ch;
+}
+
+.lead {
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  opacity: 0.8;
+  max-width: 56ch;
+  margin: 0 0 56px;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.figure {
+  margin: 0;
+}
+
+.figureVideo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: oklch(0.22 0.01 45);
+}
+
+.caption {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}

@@ -1,0 +1,51 @@
+.section {
+  padding: 0 clamp(24px, 6vw, 96px) clamp(80px, 12vw, 150px);
+}
+
+.header {
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.heading {
+  font-weight: 500;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--cream-2);
+}
+
+.badge {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: oklch(0.12 0.01 40 / 0.55);
+  backdrop-filter: blur(6px);
+  color: var(--paper);
+  font-size: 0.74rem;
+}
+
+.followCell {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--charcoal);
+  color: var(--paper);
+  text-align: center;
+  padding: 20px;
+  font-size: 1.15rem;
+}

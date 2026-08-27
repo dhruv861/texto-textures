@@ -1,0 +1,157 @@
+.section {
+  padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 96px) 0;
+}
+
+.intro {
+  margin-bottom: clamp(56px, 8vw, 100px);
+}
+
+.caseStudy {
+  margin-bottom: clamp(64px, 8vw, 120px);
+}
+
+.caseHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.caseTitle {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+}
+
+.caseTag {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.quoteBlock {
+  padding: clamp(56px, 9vw, 110px) clamp(28px, 6vw, 80px);
+  margin-bottom: 32px;
+  background: var(--cream-2);
+}
+
+.quotePrimary {
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+  line-height: 1.42;
+  max-width: 22ch;
+  margin: 0 0 28px;
+  color: var(--ink);
+}
+
+.quoteSecondary {
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.5;
+  max-width: 34ch;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.caseMedia {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: var(--cream-2);
+}
+
+.caseBody {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+.caseText {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 56ch;
+}
+
+.credits {
+  font-size: 0.85rem;
+  line-height: 2.1;
+  color: var(--taupe);
+}
+
+.creditLabel {
+  color: var(--ink);
+}
+
+.applications {
+  padding: clamp(56px, 7vw, 88px) 0 clamp(80px, 10vw, 130px);
+  border-top: 1px solid var(--line);
+}
+
+.applicationsHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.applicationsTitle {
+  font-weight: 500;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  margin: 0;
+}
+
+.applicationsTag {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--taupe);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.gridCell {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--cream-2);
+}
+
+.gridLabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px;
+  background: linear-gradient(to top, oklch(0.12 0.01 40 / 0.7), transparent);
+  color: var(--paper);
+  font-size: 0.85rem;
+}
+
+.furnitureCell {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--cream-2);
+  background-image: repeating-linear-gradient(
+    135deg,
+    oklch(0.8 0.018 65 / 0.55) 0 2px,
+    transparent 2px 14px
+  );
+}
+
+.furnitureCell .gridLabel {
+  background: linear-gradient(to top, oklch(0.94 0.014 75 / 0.92), transparent);
+  color: var(--ink);
+}

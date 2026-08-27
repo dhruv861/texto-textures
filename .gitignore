@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw video masters (51MB+) — regenerate public/media/ from these with
+# `npm run optimize-media`; not worth committing to the repo
+/media-src

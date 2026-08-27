@@ -1,0 +1,56 @@
+.section {
+  position: relative;
+  padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 96px);
+  background: var(--charcoal);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.heading {
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  line-height: 1.05;
+  margin: 0 0 28px;
+  max-width: 14ch;
+}
+
+.accentItalic {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.lead {
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  max-width: 52ch;
+  opacity: 0.85;
+  line-height: 1.6;
+  margin: 0 0 56px;
+}
+
+.mainVideo {
+  aspect-ratio: 16 / 8;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: oklch(0.2 0.01 40);
+}
+
+.figureWrap {
+  max-width: 460px;
+}
+
+.figure {
+  margin: 0;
+}
+
+.figureVideo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: oklch(0.2 0.01 40);
+}
+
+.caption {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  opacity: 0.75;
+}

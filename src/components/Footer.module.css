@@ -1,0 +1,38 @@
+.footer {
+  border-top: 1px solid var(--line);
+}
+
+.inner {
+  padding: 56px clamp(24px, 6vw, 96px) 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.1rem;
+}
+
+.accentItalic {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: var(--taupe);
+}
+
+.copy {
+  font-size: 0.8rem;
+  color: var(--taupe);
+}
+
+.instaLink {
+  color: var(--taupe);
+}

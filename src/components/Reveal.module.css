@@ -1,0 +1,12 @@
+.pending {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 1.15s cubic-bezier(0.16, 0.8, 0.24, 1),
+    transform 1.15s cubic-bezier(0.16, 0.8, 0.24, 1);
+}
+
+.pending.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

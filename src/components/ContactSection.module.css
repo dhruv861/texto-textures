@@ -1,0 +1,85 @@
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 6vw, 96px) clamp(90px, 12vw, 160px);
+}
+
+.header {
+  margin-bottom: 48px;
+}
+
+.heading {
+  font-weight: 500;
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  line-height: 1.1;
+  margin: 0 0 20px;
+}
+
+.body {
+  color: var(--ink-soft);
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0;
+}
+
+.confirmation {
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+}
+
+.confirmationText {
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+  margin: 0;
+}
+
+.form {
+  border-top: 1px solid var(--line);
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--taupe);
+}
+
+.input,
+.textarea {
+  border: none;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  padding: 10px 0;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  outline: none;
+  border-radius: 0;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.submit {
+  align-self: flex-start;
+  padding: 14px 34px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}

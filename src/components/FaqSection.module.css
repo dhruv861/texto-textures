@@ -1,0 +1,49 @@
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 6vw, 96px) clamp(80px, 12vw, 150px);
+}
+
+.header {
+  margin-bottom: 44px;
+}
+
+.heading {
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.item {
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0;
+}
+
+.question {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  color: var(--ink);
+  padding: 0;
+}
+
+.sign {
+  font-family: var(--font-manrope), sans-serif;
+  color: var(--accent-deep);
+  flex-shrink: 0;
+}
+
+.answer {
+  margin: 16px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  max-width: 60ch;
+}
