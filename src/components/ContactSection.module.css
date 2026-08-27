@@ -86,10 +86,33 @@
   border-bottom-color: var(--error);
 }
 
+.errorRow {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.2s var(--ease-out),
+    opacity 0.15s var(--ease-out);
+}
+
+.errorRow[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
 .error {
+  overflow: hidden;
+  display: block;
+  padding-top: 6px;
   font-size: 0.8rem;
   color: var(--error);
   letter-spacing: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .errorRow {
+    transition: opacity 0.15s ease;
+  }
 }
 
 .textarea {

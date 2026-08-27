@@ -13,6 +13,10 @@ export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     let mx = 0,
       my = 0,
       cx = 0,

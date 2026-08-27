@@ -27,8 +27,8 @@
   border: 1.5px solid var(--ink);
   transform: scale(0.586);
   transition:
-    transform 0.35s var(--ease-out),
-    border-color 0.3s ease;
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .ringPos.hover .ringShape {
@@ -49,5 +49,15 @@
   .ringPos,
   .dot {
     display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* A cursor that continuously chases the pointer is pure decorative
+     movement with no functional payoff — drop it rather than gentle it,
+     and fall back to the native cursor. */
+  .ringPos,
+  .dot {
+    display: none !important;
   }
 }

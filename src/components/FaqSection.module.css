@@ -69,3 +69,10 @@
   line-height: 1.6;
   max-width: 60ch;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .answerRow {
+    /* Drop the expanding-height motion, keep the fade. */
+    transition: opacity 0.2s ease;
+  }
+}

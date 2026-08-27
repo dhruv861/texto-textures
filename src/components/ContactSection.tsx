@@ -63,7 +63,9 @@ export default function ContactSection() {
                 onChange={() => errors.name && setErrors((e) => ({ ...e, name: undefined }))}
                 className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
               />
-              {errors.name && <span className={styles.error}>{errors.name}</span>}
+              <div className={styles.errorRow} data-open={Boolean(errors.name)}>
+                <span className={styles.error}>{errors.name}</span>
+              </div>
             </label>
             <label className={styles.label}>
               Email
@@ -74,7 +76,9 @@ export default function ContactSection() {
                 onChange={() => errors.email && setErrors((e) => ({ ...e, email: undefined }))}
                 className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
               />
-              {errors.email && <span className={styles.error}>{errors.email}</span>}
+              <div className={styles.errorRow} data-open={Boolean(errors.email)}>
+                <span className={styles.error}>{errors.email}</span>
+              </div>
             </label>
           </div>
           <div className={styles.formRow}>

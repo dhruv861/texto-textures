@@ -17,9 +17,9 @@
     0 1px 16px oklch(0.1 0.01 40 / 0.55),
     0 1px 3px oklch(0.1 0.01 40 / 0.7);
   transition:
-    background 0.5s ease,
-    border-color 0.5s ease,
-    text-shadow 0.5s ease;
+    background 0.3s ease,
+    border-color 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .header.scrolled {
@@ -35,7 +35,7 @@
   display: inline-block;
   transform: scale(1.12);
   transform-origin: left center;
-  transition: transform 0.4s cubic-bezier(0.16, 0.8, 0.24, 1);
+  transition: transform 0.28s cubic-bezier(0.16, 0.8, 0.24, 1);
 }
 
 .header.scrolled .logo {
@@ -146,5 +146,30 @@
   .menuToggle,
   .mobileMenu {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo,
+  .header.scrolled .logo {
+    transform: none;
+    transition: none;
+  }
+
+  .mobileMenu {
+    transform: none;
+    transition:
+      opacity 0.2s ease,
+      visibility 0s linear 0.2s;
+  }
+
+  .mobileMenu[data-open="true"] {
+    transition: opacity 0.2s ease;
+  }
+
+  .mobileLink,
+  .mobileMenu[data-open="true"] .mobileLink {
+    transform: none;
+    transition: opacity 0.15s ease;
   }
 }
