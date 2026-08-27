@@ -139,19 +139,3 @@
   font-size: 0.85rem;
 }
 
-.furnitureCell {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  background-color: var(--cream-2);
-  background-image: repeating-linear-gradient(
-    135deg,
-    oklch(0.8 0.018 65 / 0.55) 0 2px,
-    transparent 2px 14px
-  );
-}
-
-.furnitureCell .gridLabel {
-  background: linear-gradient(to top, oklch(0.94 0.014 75 / 0.92), transparent);
-  color: var(--ink);
-}
