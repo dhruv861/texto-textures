@@ -7,7 +7,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px clamp(20px, 5vw, 64px);
+  /* Fixed padding: the "compact on scroll" feel comes from .inner's
+     transform below instead of animating padding, which would force a
+     layout recalc on every frame of the transition. */
+  padding: 16px clamp(20px, 5vw, 64px);
   background: transparent;
   border-bottom: 1px solid transparent;
   text-shadow:
@@ -16,12 +19,10 @@
   transition:
     background 0.5s ease,
     border-color 0.5s ease,
-    padding 0.4s ease,
     text-shadow 0.5s ease;
 }
 
 .header.scrolled {
-  padding: 16px clamp(20px, 5vw, 64px);
   background: oklch(0.965 0.01 80 / 0.94);
   border-bottom-color: var(--line);
   backdrop-filter: blur(12px);
@@ -31,6 +32,14 @@
 .logo {
   font-size: 1.3rem;
   letter-spacing: 0.01em;
+  display: inline-block;
+  transform: scale(1.12);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.16, 0.8, 0.24, 1);
+}
+
+.header.scrolled .logo {
+  transform: scale(1);
 }
 
 .accentItalic {
@@ -60,6 +69,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.menuToggle:active {
+  transform: scale(0.88);
 }
 
 .mobileMenu {
@@ -82,6 +96,11 @@
   height: 44px;
   border: none;
   background: none;
+  transition: transform 0.15s ease;
+}
+
+.closeButton:active {
+  transform: scale(0.88);
 }
 
 .mobileLink {

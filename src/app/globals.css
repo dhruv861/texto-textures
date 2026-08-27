@@ -11,6 +11,9 @@
   --accent: oklch(0.56 0.105 66);
   --accent-deep: oklch(0.36 0.085 60);
   --accent-soft: oklch(0.91 0.028 75);
+
+  /* Semantic, not a brand accent — form validation only. */
+  --error: oklch(0.55 0.15 25);
 }
 
 * {

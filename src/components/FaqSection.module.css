@@ -39,6 +39,12 @@
   font-family: var(--font-manrope), sans-serif;
   color: var(--accent-deep);
   flex-shrink: 0;
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.question:active .sign {
+  transform: scale(0.82);
 }
 
 .answer {
