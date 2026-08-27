@@ -46,7 +46,7 @@ export function useMagnetic<T extends HTMLElement>() {
 
     const onPointerDown = () => {
       pressed = true;
-      apply("transform 0.1s ease");
+      apply("transform 0.1s var(--ease-out)");
     };
 
     const onPointerUp = () => {

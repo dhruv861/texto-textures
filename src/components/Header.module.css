@@ -69,7 +69,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s ease;
+  transition: transform 0.15s var(--ease-out);
 }
 
 .menuToggle:active {
@@ -86,6 +86,24 @@
   align-items: center;
   justify-content: center;
   gap: 32px;
+  opacity: 0;
+  transform: scale(0.96);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out),
+    visibility 0s linear 0.2s;
+}
+
+.mobileMenu[data-open="true"] {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out);
 }
 
 .closeButton {
@@ -96,7 +114,7 @@
   height: 44px;
   border: none;
   background: none;
-  transition: transform 0.15s ease;
+  transition: transform 0.15s var(--ease-out);
 }
 
 .closeButton:active {
@@ -105,6 +123,19 @@
 
 .mobileLink {
   font-size: 2rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.15s var(--ease-out),
+    transform 0.15s var(--ease-out);
+}
+
+.mobileMenu[data-open="true"] .mobileLink {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.25s var(--ease-out) calc(var(--stagger-index) * 40ms + 60ms),
+    transform 0.25s var(--ease-out) calc(var(--stagger-index) * 40ms + 60ms);
 }
 
 @media (min-width: 860px) {

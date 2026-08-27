@@ -25,6 +25,13 @@
 .confirmation {
   padding: 48px 0;
   border-top: 1px solid var(--line);
+  animation: fadeUp 0.4s var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confirmation {
+    animation: none;
+  }
 }
 
 .confirmationText {

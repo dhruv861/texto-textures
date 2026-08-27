@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 import { useMagnetic } from "@/lib/useMagnetic";
 import styles from "./Header.module.css";
 
@@ -75,30 +76,29 @@ export default function Header() {
         </button>
       </header>
 
-      {menuOpen && (
-        <div className={styles.mobileMenu}>
-          <button
-            aria-label="Close menu"
+      <div className={styles.mobileMenu} data-open={menuOpen} inert={!menuOpen}>
+        <button
+          aria-label="Close menu"
+          onClick={() => setMenuOpen(false)}
+          className={styles.closeButton}
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20">
+            <line x1="1" y1="1" x2="19" y2="19" stroke="var(--ink)" strokeWidth="1.4" />
+            <line x1="19" y1="1" x2="1" y2="19" stroke="var(--ink)" strokeWidth="1.4" />
+          </svg>
+        </button>
+        {[...NAV_LINKS, { href: "#contact", label: "Contact" }].map((link, i) => (
+          <a
+            key={link.href}
+            href={link.href}
             onClick={() => setMenuOpen(false)}
-            className={styles.closeButton}
+            style={{ "--stagger-index": i } as CSSProperties}
+            className={`serif ${styles.mobileLink} ${link.accent ? styles.accentItalic : ""}`}
           >
-            <svg width="20" height="20" viewBox="0 0 20 20">
-              <line x1="1" y1="1" x2="19" y2="19" stroke="var(--ink)" strokeWidth="1.4" />
-              <line x1="19" y1="1" x2="1" y2="19" stroke="var(--ink)" strokeWidth="1.4" />
-            </svg>
-          </button>
-          {[...NAV_LINKS, { href: "#contact", label: "Contact" }].map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className={`serif ${styles.mobileLink} ${link.accent ? styles.accentItalic : ""}`}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
+            {link.label}
+          </a>
+        ))}
+      </div>
     </>
   );
 }
