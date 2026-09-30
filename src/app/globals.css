@@ -11,6 +11,14 @@
   --accent: oklch(0.56 0.105 66);
   --accent-deep: oklch(0.36 0.085 60);
   --accent-soft: oklch(0.91 0.028 75);
+
+  /* Semantic, not a brand accent — form validation only. */
+  --error: oklch(0.55 0.15 25);
+
+  /* Built-in CSS easings read as weak/generic. This is a stronger
+     ease-out with real punch, for anything entering/exiting or
+     responding directly to a click or tap. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 * {
@@ -42,6 +50,7 @@ body {
 a {
   color: var(--ink);
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 a:hover {
@@ -65,6 +74,14 @@ video::-webkit-media-controls {
 @media (hover: hover) and (pointer: fine) {
   body {
     cursor: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  /* CustomCursor hides itself under reduced motion — restore the native
+     cursor instead of leaving the visitor with none at all. */
+  body {
+    cursor: auto;
   }
 }
 

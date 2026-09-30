@@ -1,29 +1,38 @@
-.ring,
+.ringPos,
 .dot {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
-  border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
 }
 
-.ring {
-  width: 34px;
-  height: 34px;
-  margin-left: -17px;
-  margin-top: -17px;
-  border: 1.5px solid var(--ink);
-  transition:
-    width 0.35s cubic-bezier(0.16, 0.8, 0.24, 1),
-    height 0.35s cubic-bezier(0.16, 0.8, 0.24, 1),
-    border-color 0.3s ease;
-}
-
-.ring.hover {
+/* Position (JS-driven translate, every rAF frame) and shape (CSS-driven
+   scale, transitioned) are split across two elements. Both would fight
+   over the single `transform` property on one node — animating size via
+   width/height instead would dodge that, but forces layout+paint every
+   frame instead of a compositor-only scale. */
+.ringPos {
   width: 58px;
   height: 58px;
+  margin-left: -29px;
+  margin-top: -29px;
+}
+
+.ringShape {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  transform: scale(0.586);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ringPos.hover .ringShape {
+  transform: scale(1);
   border-color: var(--accent);
 }
 
@@ -32,12 +41,23 @@
   height: 6px;
   margin-left: -3px;
   margin-top: -3px;
+  border-radius: 50%;
   background: var(--ink);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .ring,
+  .ringPos,
   .dot {
     display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* A cursor that continuously chases the pointer is pure decorative
+     movement with no functional payoff — drop it rather than gentle it,
+     and fall back to the native cursor. */
+  .ringPos,
+  .dot {
+    display: none !important;
   }
 }

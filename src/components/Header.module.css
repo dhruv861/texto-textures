@@ -7,21 +7,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px clamp(20px, 5vw, 64px);
+  /* Fixed padding: the "compact on scroll" feel comes from .inner's
+     transform below instead of animating padding, which would force a
+     layout recalc on every frame of the transition. */
+  padding: 16px clamp(20px, 5vw, 64px);
   background: transparent;
   border-bottom: 1px solid transparent;
   text-shadow:
     0 1px 16px oklch(0.1 0.01 40 / 0.55),
     0 1px 3px oklch(0.1 0.01 40 / 0.7);
   transition:
-    background 0.5s ease,
-    border-color 0.5s ease,
-    padding 0.4s ease,
-    text-shadow 0.5s ease;
+    background 0.3s ease,
+    border-color 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .header.scrolled {
-  padding: 16px clamp(20px, 5vw, 64px);
   background: oklch(0.965 0.01 80 / 0.94);
   border-bottom-color: var(--line);
   backdrop-filter: blur(12px);
@@ -31,6 +32,14 @@
 .logo {
   font-size: 1.3rem;
   letter-spacing: 0.01em;
+  display: inline-block;
+  transform: scale(1.12);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.16, 0.8, 0.24, 1);
+}
+
+.header.scrolled .logo {
+  transform: scale(1);
 }
 
 .accentItalic {
@@ -60,6 +69,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.15s var(--ease-out);
+}
+
+.menuToggle:active {
+  transform: scale(0.88);
 }
 
 .mobileMenu {
@@ -72,6 +86,24 @@
   align-items: center;
   justify-content: center;
   gap: 32px;
+  opacity: 0;
+  transform: scale(0.96);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out),
+    visibility 0s linear 0.2s;
+}
+
+.mobileMenu[data-open="true"] {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out);
 }
 
 .closeButton {
@@ -82,10 +114,28 @@
   height: 44px;
   border: none;
   background: none;
+  transition: transform 0.15s var(--ease-out);
+}
+
+.closeButton:active {
+  transform: scale(0.88);
 }
 
 .mobileLink {
   font-size: 2rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.15s var(--ease-out),
+    transform 0.15s var(--ease-out);
+}
+
+.mobileMenu[data-open="true"] .mobileLink {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.25s var(--ease-out) calc(var(--stagger-index) * 40ms + 60ms),
+    transform 0.25s var(--ease-out) calc(var(--stagger-index) * 40ms + 60ms);
 }
 
 @media (min-width: 860px) {
@@ -96,5 +146,30 @@
   .menuToggle,
   .mobileMenu {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo,
+  .header.scrolled .logo {
+    transform: none;
+    transition: none;
+  }
+
+  .mobileMenu {
+    transform: none;
+    transition:
+      opacity 0.2s ease,
+      visibility 0s linear 0.2s;
+  }
+
+  .mobileMenu[data-open="true"] {
+    transition: opacity 0.2s ease;
+  }
+
+  .mobileLink,
+  .mobileMenu[data-open="true"] .mobileLink {
+    transform: none;
+    transition: opacity 0.15s ease;
   }
 }

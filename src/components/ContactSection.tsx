@@ -7,13 +7,32 @@ import { useMagnetic } from "@/lib/useMagnetic";
 import shared from "./shared.module.css";
 import styles from "./ContactSection.module.css";
 
+type Errors = { name?: string; email?: string };
+
+function validateEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Errors>({});
   const submitRef = useMagnetic<HTMLButtonElement>();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
+
+    const nextErrors: Errors = {};
+    if (!name) nextErrors.name = "Let us know who to ask for.";
+    if (!email) nextErrors.email = "We'll need an email to follow up.";
+    else if (!validateEmail(email)) nextErrors.email = "That email doesn't look complete.";
+
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length === 0) {
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -33,15 +52,33 @@ export default function ContactSection() {
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} noValidate className={styles.form}>
           <div className={styles.formRow}>
             <label className={styles.label}>
               Name
-              <input type="text" name="name" required className={styles.input} />
+              <input
+                type="text"
+                name="name"
+                aria-invalid={Boolean(errors.name)}
+                onChange={() => errors.name && setErrors((e) => ({ ...e, name: undefined }))}
+                className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
+              />
+              <div className={styles.errorRow} data-open={Boolean(errors.name)}>
+                <span className={styles.error}>{errors.name}</span>
+              </div>
             </label>
             <label className={styles.label}>
               Email
-              <input type="email" name="email" required className={styles.input} />
+              <input
+                type="email"
+                name="email"
+                aria-invalid={Boolean(errors.email)}
+                onChange={() => errors.email && setErrors((e) => ({ ...e, email: undefined }))}
+                className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
+              />
+              <div className={styles.errorRow} data-open={Boolean(errors.email)}>
+                <span className={styles.error}>{errors.email}</span>
+              </div>
             </label>
           </div>
           <div className={styles.formRow}>

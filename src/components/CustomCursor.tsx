@@ -13,6 +13,10 @@ export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     let mx = 0,
       my = 0,
       cx = 0,
@@ -64,7 +68,9 @@ export default function CustomCursor() {
 
   return (
     <>
-      <div ref={ringRef} className={styles.ring} aria-hidden="true" />
+      <div ref={ringRef} className={styles.ringPos} aria-hidden="true">
+        <div className={styles.ringShape} />
+      </div>
       <div ref={dotRef} className={styles.dot} aria-hidden="true" />
     </>
   );

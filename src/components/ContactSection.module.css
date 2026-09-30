@@ -25,6 +25,13 @@
 .confirmation {
   padding: 48px 0;
   border-top: 1px solid var(--line);
+  animation: fadeUp 0.4s var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confirmation {
+    animation: none;
+  }
 }
 
 .confirmationText {
@@ -67,6 +74,45 @@
   color: var(--ink);
   outline: none;
   border-radius: 0;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  border-bottom-color: var(--ink);
+}
+
+.inputError {
+  border-bottom-color: var(--error);
+}
+
+.errorRow {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.2s var(--ease-out),
+    opacity 0.15s var(--ease-out);
+}
+
+.errorRow[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.error {
+  overflow: hidden;
+  display: block;
+  padding-top: 6px;
+  font-size: 0.8rem;
+  color: var(--error);
+  letter-spacing: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .errorRow {
+    transition: opacity 0.15s ease;
+  }
 }
 
 .textarea {

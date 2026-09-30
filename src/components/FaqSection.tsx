@@ -41,7 +41,9 @@ export default function FaqSection() {
               <span>{faq.q}</span>
               <span className={styles.sign}>{isOpen ? "–" : "+"}</span>
             </button>
-            {isOpen && <p className={styles.answer}>{faq.a}</p>}
+            <div className={styles.answerRow} data-open={isOpen}>
+              <p className={styles.answer}>{faq.a}</p>
+            </div>
           </div>
         );
       })}
